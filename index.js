@@ -6,7 +6,8 @@ module.exports = function (req, time) {
 	}
 
 	var delays = isNaN(time) ? time : {socket: time, connect: time};
-	var host = req._headers ? (' to ' + req._headers.host) : '';
+	var hostHeader = req.getHeader('host');
+	var host = hostHeader ? ' to ' + hostHeader : '';
 
 	if (delays.connect !== undefined) {
 		req.timeoutTimer = setTimeout(function timeoutHandler() {
